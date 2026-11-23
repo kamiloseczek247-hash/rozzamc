@@ -1,15 +1,14 @@
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
     if (url.hostname === "panel.rozzamc.pl") {
       url.pathname = "/panel" + (
-        url.pathname === "/" ? "/index.html" : url.pathname
+        url.pathname === "/" ? "/" : url.pathname
       );
     }
 
-    return env.ASSETS.fetch(
-      new Request(url, request)
-    );
+    return env.ASSETS.fetch(new Request(url, request));
   }
 };
