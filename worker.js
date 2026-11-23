@@ -4,13 +4,13 @@ export default {
     const url = new URL(request.url);
 
     if (url.hostname === "panel.rozzamc.pl") {
-      if (url.pathname === "/") {
-        url.pathname = "/panel/";
-      } else {
-        url.pathname = "/panel" + url.pathname;
-      }
+      url.pathname = "/panel" + (
+        url.pathname === "/" ? "/" : url.pathname
+      );
     }
 
-    return env.ASSETS.fetch(new Request(url, request));
+    return env.ASSETS.fetch(
+      new Request(url, request)
+    );
   }
 };
