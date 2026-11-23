@@ -4,9 +4,11 @@ export default {
     const url = new URL(request.url);
 
     if (url.hostname === "panel.rozzamc.pl") {
-      url.pathname = "/panel" + (
-        url.pathname === "/" ? "/" : url.pathname
-      );
+      if (url.pathname === "/") {
+        url.pathname = "/panel/";
+      } else {
+        url.pathname = "/panel" + url.pathname;
+      }
     }
 
     return env.ASSETS.fetch(new Request(url, request));
