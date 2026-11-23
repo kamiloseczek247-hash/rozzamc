@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100b10">
+  <title>Moje działki — RozzaMC</title>
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/panel.css">
+  <script src="dzialki.js" defer></script>
+</head>
+<body>
+  <main class="panel-page">
+    <div class="panel-grid" aria-hidden="true"></div><div class="panel-glow" aria-hidden="true"></div>
+    <section class="panel-card plots-page" aria-labelledby="plots-title">
+      <a class="panel-brand" href="https://rozzamc.pl" aria-label="RozzaMC — strona główna"><img src="../assets/logo.png" alt="Logo RozzaMC" width="72" height="72"></a>
+      <p class="panel-kicker">ROZZAMC / REAL LIFE</p>
+      <h1 id="plots-title">Moje działki</h1>
+      <p class="section-copy">Zarządzaj uprawnieniami działek i zaufanymi graczami.</p>
+      <p id="plots-message" class="section-state" role="status" aria-live="polite">Ładowanie działek…</p>
+      <div id="plots-auth" class="plot-auth" hidden>
+        <p>Do zarządzania działkami wymagane jest zalogowanie w panelu gracza.</p>
+        <a class="back-button" href="../panel/">Otwórz panel gracza</a>
+      </div>
+      <section aria-labelledby="owned-plots-heading">
+        <h2 id="owned-plots-heading">Twoje działki</h2>
+        <ul id="plots-list" class="data-list plots-list" aria-live="polite"></ul>
+        <p id="plots-empty" class="empty-row" hidden>Nie masz jeszcze żadnych działek.</p>
+      </section>
+      <section class="plot-requests-section" aria-labelledby="plot-pending-heading">
+        <h2 id="plot-pending-heading">Działki oczekujące</h2>
+        <ul id="plot-pending" class="data-list plots-list" aria-live="polite"></ul>
+        <p id="pending-empty" class="empty-row" hidden>Nie masz działek oczekujących na zatwierdzenie.</p>
+      </section>
+      <section class="plot-requests-section" aria-labelledby="plot-requests-heading">
+        <h2 id="plot-requests-heading">Historia wniosków</h2>
+        <ul id="plot-requests" class="data-list plots-list" aria-live="polite"></ul>
+        <p id="requests-empty" class="empty-row" hidden>Nie masz historii wniosków o działkę.</p>
+      </section>
+      <p class="panel-domain">Dane pobierane bezpośrednio z panelu gracza.</p>
+      <a class="back-button secondary" href="../panel/">← Wróć do panelu gracza</a>
+    </section>
+    <footer class="panel-footer">© 2026 RozzaMC</footer>
+  </main>
+</body>
+</html>

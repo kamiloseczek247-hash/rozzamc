@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100b10">
+  <title>Administracja działkami — RozzaMC</title>
+  <link rel="icon" type="image/png" href="../../assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/panel.css">
+  <script src="dzialki.js" defer></script>
+</head>
+<body>
+  <main class="panel-page">
+    <div class="panel-grid" aria-hidden="true"></div><div class="panel-glow" aria-hidden="true"></div>
+    <section class="panel-card plots-page admin-plots-page" aria-labelledby="admin-title">
+      <a class="panel-brand" href="../../panel/" aria-label="RozzaMC — panel Real Life"><img src="../../assets/logo.png" alt="Logo RozzaMC" width="72" height="72"></a>
+      <p class="panel-kicker">ROZZAMC / ADMINISTRACJA</p>
+      <h1 id="admin-title">Wnioski o działki</h1>
+      <p id="admin-message" class="section-state" role="status" aria-live="polite"></p>
+      <section id="admin-login-view" class="admin-auth" aria-labelledby="admin-login-title">
+        <h2 id="admin-login-title">Logowanie administratora</h2>
+        <form id="admin-login-form">
+          <label for="admin-password">Hasło</label>
+          <input id="admin-password" name="password" type="password" autocomplete="current-password" required>
+          <button class="back-button" type="submit">Zaloguj</button>
+        </form>
+      </section>
+      <section id="admin-password-view" class="admin-auth" aria-labelledby="password-change-title" hidden>
+        <h2 id="password-change-title">Ustaw nowe hasło</h2>
+        <p class="section-copy">Przed dalszą pracą zmień hasło administratora.</p>
+        <form id="admin-password-form">
+          <label for="new-admin-password">Nowe hasło</label>
+          <input id="new-admin-password" name="password" type="password" autocomplete="new-password" required>
+          <button class="back-button" type="submit">Zmień hasło</button>
+        </form>
+      </section>
+      <section id="admin-app" hidden>
+        <button id="admin-logout-button" class="small-button secondary-small" type="button">Wyloguj</button>
+        <section class="admin-active-plots" aria-labelledby="active-plots-title">
+          <h2 id="active-plots-title">Aktywne działki</h2>
+          <p id="active-plots-state" class="section-state" role="status">Ładowanie działek…</p>
+          <ul id="active-plots-list" class="data-list plots-list" aria-live="polite"></ul>
+        </section>
+        <div class="admin-plot-layout">
+          <section aria-labelledby="requests-title">
+            <h2 id="requests-title">Lista wniosków</h2>
+            <p id="admin-requests-state" class="section-state" role="status">Ładowanie…</p>
+            <ul id="admin-requests-list" class="admin-request-list" aria-live="polite"></ul>
+          </section>
+          <section id="request-detail" class="request-detail" aria-labelledby="request-detail-title" aria-live="polite">
+            <h2 id="request-detail-title">Szczegóły wniosku</h2>
+            <p id="request-placeholder" class="empty-row">Wybierz wniosek z listy.</p>
+            <div id="request-data" hidden>
+              <div id="request-facts" class="request-facts"></div>
+              <div class="plot-schematic-wrap">
+                <h3>Schemat działki</h3>
+                <div id="plot-schematic" class="plot-schematic" role="img" aria-label="Schemat wybranej działki">
+                  <span class="schematic-plot"></span><span class="schematic-label">DZIAŁKA</span>
+                </div>
+              </div>
+              <section class="collision-panel" aria-labelledby="collision-title">
+                <h3 id="collision-title">Sprawdzenie kolizji</h3>
+                <p id="collision-status" class="collision-status">Ładowanie informacji o kolizji…</p>
+              </section>
+              <form id="reject-form" class="reject-form">
+                <label for="rejection-reason">Powód odrzucenia</label>
+                <textarea id="rejection-reason" name="reason" rows="3" required></textarea>
+                <div class="admin-actions">
+                  <button id="approve-button" class="small-button" type="button">Zatwierdź wniosek</button>
+                  <button id="reject-button" class="small-button secondary-small" type="submit">Odrzuć wniosek</button>
+                </div>
+              </form>
+            </div>
+          </section>
+        </div>
+      </section>
+      <a class="back-button secondary" href="../../panel/">← Wróć do panelu Real Life</a>
+    </section>
+    <footer class="panel-footer">© 2026 RozzaMC</footer>
+  </main>
+</body>
+</html>

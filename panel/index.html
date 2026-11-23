@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100b10"><title>Panel gracza — RozzaMC</title>
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/panel.css"><script src="panel.js" defer></script><script src="../dzialki/dzialki.js" defer></script>
+</head>
+<body>
+  <main class="panel-page"><div class="panel-grid" aria-hidden="true"></div><div class="panel-glow" aria-hidden="true"></div>
+    <section class="panel-card" aria-labelledby="panel-title">
+      <a class="panel-brand" href="https://rozzamc.pl" aria-label="RozzaMC — strona główna"><img src="../assets/logo.png" alt="Logo RozzaMC" width="72" height="72"></a>
+      <p class="panel-kicker">ROZZAMC / REAL LIFE</p><h1 id="panel-title">Panel<br>gracza</h1>
+      <div id="login-view">
+        <div class="pixel-badge"><span class="status-dot"></span> Wprowadź kod</div>
+        <p class="panel-copy">Wpisz 8-cyfrowy kod wygenerowany komendą <strong>/panel</strong> w Minecraft. Po zalogowaniu otwórz panel pod adresem <a class="inline-link" href="https://panel.rozzamc.pl">panel.rozzamc.pl</a>.</p>
+        <form id="login-form"><label for="code">Kod logowania</label><input id="code" name="code" inputmode="numeric" pattern="[0-9]{8}" maxlength="8" required autocomplete="one-time-code"><button class="back-button" type="submit">Zaloguj</button></form>
+      </div>
+      <div id="app-view" hidden>
+        <nav class="panel-tabs" aria-label="Sekcje panelu">
+          <button class="tab-button active" type="button" data-tab="account" aria-selected="true">Konto</button>
+          <button class="tab-button" type="button" data-tab="loans" aria-selected="false">Pożyczki</button>
+          <button class="tab-button" type="button" data-tab="companies" aria-selected="false">Firmy</button>
+          <button class="tab-button" type="button" data-tab="shop" aria-selected="false">Sklep</button>
+          <button class="tab-button" type="button" data-tab="plots" aria-selected="false">Działki</button>
+        </nav>
+        <section class="tab-panel active" id="account-panel" data-panel="account">
+          <p class="panel-copy">Saldo konta osobistego</p><strong id="balance">— zł</strong>
+          <form id="transfer-form"><label for="nickname">Nick odbiorcy</label><input id="nickname" minlength="3" maxlength="16" pattern="[A-Za-z0-9_]{3,16}" required><label for="amount">Kwota</label><input id="amount" type="number" min="0.01" step="0.01" inputmode="decimal" required><button class="back-button" type="submit">Przelew</button></form>
+          <section class="account-history" aria-labelledby="history-title">
+            <h2 id="history-title">Ostatnie transakcje</h2>
+            <p id="history-empty">Brak transakcji.</p>
+            <ul id="transactions" aria-live="polite"></ul>
+          </section>
+        </section>
+        <section class="tab-panel" id="loans-panel" data-panel="loans" hidden>
+          <h2>Pożyczki</h2>
+          <p class="section-copy" id="loan-summary">Ładowanie danych pożyczek…</p>
+          <form id="loan-form">
+            <label for="loan-amount">Kwota pożyczki</label><input id="loan-amount" type="number" min="0.01" step="0.01" inputmode="decimal" required>
+            <label for="loan-installments">Liczba rat</label><input id="loan-installments" type="number" min="1" step="1" value="1" required>
+            <p class="hint">Do kwoty pożyczki doliczane jest 10% odsetek. Odsetki są opłatą i nie trafiają na żadne konto.</p>
+            <button class="back-button" type="submit">Weź pożyczkę</button>
+          </form>
+          <p class="section-state" id="loans-state" role="status">Ładowanie…</p>
+          <ul class="data-list" id="loans-list" aria-live="polite"></ul>
+        </section>
+        <section class="tab-panel" id="companies-panel" data-panel="companies" hidden>
+          <h2>Firmy</h2>
+          <p class="section-copy">Założenie firmy kosztuje 5 000 zł. Wynagrodzenia pracowników są wypłacane z salda firmy.</p>
+          <form id="company-form">
+            <label for="company-name">Nazwa firmy</label><input id="company-name" maxlength="32" required>
+            <label for="company-category">Branża</label>
+            <select id="company-category" required>
+              <option value="Handel">Handel</option><option value="Gastronomia">Gastronomia</option><option value="Usługi">Usługi</option><option value="Transport">Transport</option><option value="Rozrywka">Rozrywka</option><option value="Budownictwo">Budownictwo</option><option value="Inne">Inne</option>
+            </select>
+            <div id="custom-category-wrap" hidden><label for="custom-category">Własna branża</label><input id="custom-category" maxlength="32"></div>
+            <button class="back-button" type="submit">Załóż firmę · 5 000 zł</button>
+          </form>
+          <div class="company-columns">
+            <section><h3>Moje firmy</h3><p class="section-state" id="companies-state" role="status">Ładowanie…</p><ul class="data-list" id="owned-companies" aria-live="polite"></ul></section>
+            <section><h3>Zatrudnienie</h3><ul class="data-list" id="employment-list" aria-live="polite"></ul></section>
+          </div>
+          <section class="company-invitations"><h3>Zaproszenia</h3><p class="section-state" id="invitations-state"></p><ul class="data-list" id="invitations-list" aria-live="polite"></ul></section>
+          <section><h3>Firmy na rynku</h3><ul class="data-list" id="companies-list" aria-live="polite"></ul></section>
+        </section>
+        <section class="tab-panel" id="shop-panel" data-panel="shop" hidden>
+          <h2>Sklep</h2>
+          <p class="section-copy" id="shop-summary">Ceny zawierają VAT — podana cena to kwota końcowa. Zakupy są wyłącznie w jedną stronę; sprzedawanie przedmiotów nie jest dostępne.</p>
+          <p class="section-state" id="shop-state" role="status">Ładowanie sklepu…</p>
+          <ul class="data-list" id="shop-list" aria-live="polite"></ul>
+          <p class="section-state" id="shop-message" role="status" aria-live="polite"></p>
+        </section>
+        <section class="tab-panel panel-plots-tab" id="plots-panel" data-panel="plots" hidden>
+          <h2>Działki</h2>
+          <p class="section-copy">Zarządzaj swoimi działkami, uprawnieniami i zaufanymi graczami.</p>
+          <p id="plots-message" class="section-state" role="status" aria-live="polite">Ładowanie działek…</p>
+          <div id="plots-auth" class="plot-auth" hidden>
+            <p>Zaloguj się do panelu gracza, aby zobaczyć i zarządzać swoimi działkami.</p>
+          </div>
+          <section aria-labelledby="owned-plots-heading">
+            <h2 id="owned-plots-heading">Moje działki</h2>
+            <ul id="plots-list" class="data-list plots-list" aria-live="polite"></ul>
+            <p id="plots-empty" class="empty-row" hidden>Nie masz jeszcze żadnych działek.</p>
+          </section>
+          <section class="plot-requests-section" aria-labelledby="plot-pending-heading">
+            <h2 id="plot-pending-heading">Działki oczekujące</h2>
+            <ul id="plot-pending" class="data-list plots-list" aria-live="polite"></ul>
+            <p id="pending-empty" class="empty-row" hidden>Nie masz działek oczekujących na zatwierdzenie.</p>
+          </section>
+          <section class="plot-requests-section" aria-labelledby="plot-requests-heading">
+            <h2 id="plot-requests-heading">Historia wniosków</h2>
+            <ul id="plot-requests" class="data-list plots-list" aria-live="polite"></ul>
+            <p id="requests-empty" class="empty-row" hidden>Nie masz historii wniosków o działkę.</p>
+          </section>
+        </section>
+        <p id="last-updated" class="panel-domain" role="status" aria-live="polite">Dane odświeżane co minutę.</p>
+        <button id="logout" class="back-button secondary" type="button">Wyloguj</button>
+      </div>
+      <p id="message" role="status" class="panel-domain"></p>
+      <a class="back-button" href="https://rozzamc.pl"><span aria-hidden="true">←</span> Wróć na stronę</a>
+    </section><footer class="panel-footer">© 2026 RozzaMC</footer>
+  </main>
+</body></html>
